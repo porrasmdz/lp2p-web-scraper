@@ -1,0 +1,3 @@
+[submodule "lp2p-web-scraper"]
+	path = lp2p-web-scraper
+	url = https://github.com/porrasmdz/lp2p-web-scraper
