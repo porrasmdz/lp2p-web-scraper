@@ -76,7 +76,6 @@ class Extractor
       values[key] = ""
     end
     
-    puts "offline extract #{contenedor}"
     contenedor.css(children_css).each do |element|
       selectors.each do |label, css_selector|
         # Extraer el valor usando el selector CSS y agregarlo al array correspondiente en el hash

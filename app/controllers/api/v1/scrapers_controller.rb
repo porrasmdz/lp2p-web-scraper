@@ -17,9 +17,10 @@ class Api::V1::ScrapersController < ApplicationController
       extractor = LinkedinExtractor.new(scraper)
     elsif exttype=="noticias"
       extractor = NewsExtractor.new(scraper)
-    
-    else "default"
-      puts "fallback IS #{exttype}"
+    elsif exttype == "twitter"
+      extractor = TwitterExtractor.new(scraper)
+    else 
+      puts "fallback"
       extractor = Extractor.new(scraper)
       
     end
@@ -39,14 +40,23 @@ class Api::V1::ScrapersController < ApplicationController
   def scrape_online
     scraper = Scraper.find(params[:id])
     type = params[:type] || 'default'
-    extractor = case type
-    when 'linkedin'
-      LinkedinExtractor.new(scraper)
-    when 'noticias'
-      NewsExtractor.new(scraper)
-    else
-      Extractor.new(scraper)
+    extractor = "ads"
+    exttype = type.to_str.strip
+    
+    if exttype =="linkedin"
+      puts "ejecutando de tipo linkedin"
+      extractor = LinkedinExtractor.new(scraper)
+    elsif exttype=="noticias"
+      extractor = NewsExtractor.new(scraper)
+    elsif exttype=="twitter"
+      extractor = TwitterExtractor.new(scraper)
+    
+    else 
+      puts "fallback"
+      extractor = Extractor.new(scraper)
+      
     end
+    
     result = extractor.extract()
     extractor.guardar(result)
     if scraper.update(result: result)

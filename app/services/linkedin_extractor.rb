@@ -5,7 +5,16 @@ class LinkedinExtractor < Extractor
   def initialize(scraper)
     super(scraper, "linkedin.csv")
   end
-
+  
+  def extract
+    puts "EXTRACTING"
+    pagina = URI.open(@url).read
+    puts pagina
+    paginaHTML = Nokogiri::HTML(pagina)
+    puts paginaHTML
+    @scraper.raw_html = paginaHTML.to_html
+    return []
+  end
   def offline_extract
     puts "EVAL RESULT "
     if @scraper.raw_html.nil? || @scraper.raw_html.empty?
