@@ -10,11 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_08_27_013736) do
+ActiveRecord::Schema[7.2].define(version: 2024_09_03_020918) do
   create_table "scrapers", force: :cascade do |t|
     t.string "name"
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.json "result"
+    t.string "list_xpath"
+    t.string "children_css"
+    t.json "target_tags"
+    t.text "raw_html"
   end
 end

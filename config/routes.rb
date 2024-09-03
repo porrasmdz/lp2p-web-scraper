@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do 
-      resources :scrapers
+      resources :scrapers do
+        member do
+          post :scrape 
+          post :scrape_online 
+        end
+      end
     end
   end
 
